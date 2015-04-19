@@ -1,0 +1,28 @@
+{
+  "name": "promise-fu",
+  "version": "0.1.0",
+  "description": "Helpers for working with promises.",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "keywords": [
+    "promise",
+    "promises",
+    "parallel"
+  ],
+  "author": "Ben Mackie <bdmackie@gmail.com>",
+  "copyright": "Ben Mackie 2015",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "bluebird": "^2.9.24"
+  },
+  "devDependencies": {
+    "chai": "^2.2.0",
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-mocha": "^2.0.1",
+    "mocha": "^2.2.4",
+    "underscore": "^1.8.3"
+  }
+}

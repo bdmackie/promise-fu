@@ -14,6 +14,10 @@
   "author": "Ben Mackie <bdmackie@gmail.com>",
   "copyright": "Ben Mackie 2015",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bdmackie/promise-fu"
+  },
   "dependencies": {
     "bluebird": "^2.9.24"
   },

@@ -6,5 +6,5 @@
  'use strict';
 
 module.exports = {
-	PromiseChain : require('./promise-chain');
+	PromiseChain : require('./promise-chain')
 };

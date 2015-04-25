@@ -1,7 +1,7 @@
 'use strict';
 var _ = require('underscore');
 
-function TestingLog() {
+function TestingLogger() {
 	var _this = this;
 
 	var _logs = [];
@@ -27,4 +27,4 @@ function TestingLog() {
 	}
 }
 
-module.exports = TestingLog;
+module.exports = TestingLogger;

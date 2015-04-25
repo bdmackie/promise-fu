@@ -31,11 +31,52 @@ function PromiseChain(parent) {
     }
 
     /**
+     * Add a promiser style function (a functions that returns a promise) to the chain.
+     */
+    _this.addPromiser = function(promiser) {
+        if (_fork)
+            _fork.addPromiser(promiser);
+        else
+            _promise = _promise.then(promiser);
+        return _this;      
+    }
+
+    /**
+     * Add a collection of promiser style functions (a functions that returns a promise) 
+     * to the chain, to run in parallel and join as an 'all'. 
+     * This will be the case whether the promise chain has been forked or not.
+     */
+    _this.addPromisers = function(promisers) {
+        return _this.addPromiser(function() { 
+            var promises = [];
+            promisers.forEach(function(promiser) {
+                promises.push(promiser());
+            })
+            return Promise.all(promises); 
+        });
+    }
+
+    /**
      * Add a resolver style function (a functions that has resolver and reject callback 
      * arguments respectively) to the chain.
      */
     _this.addResolver = function(resolver) {
         return _this.addPromiser(function() { return new Promise(resolver); });
+    }
+
+    /**
+     * Adds a collection of resolver style functions (a functions that has resolver and reject 
+     * callback arguments respectively) to the chain, to run in parallel and join as an 'all'. 
+     * This will be the case whether the promise chain has been forked or not.
+     */
+    _this.addResolvers = function(resolvers) {
+        return _this.addPromiser(function() { 
+            var promises = [];
+            resolvers.forEach(function(resolver) {
+                promises.push(new Promise(resolver));
+            })
+            return Promise.all(promises); 
+        });
     }
 
     /**
@@ -45,16 +86,11 @@ function PromiseChain(parent) {
      * @param promiser - the promiser 
      */
      /*
-    _this.mapPromiser = function(collection, promisers) {
-        // Support one or more tasks to map.
-         // TODO: Support either a function or an array of functions.
-        if (promisers.constructor != Array)
-            promisers = [promisers];
-
+    _this.mapPromisers = function(collection, promiserFactory) {
         // Loop over items in collection and add promiser.
         collection.forEach(function(item) {
             promisers.forEach(function(promiser) {
-                _this.addPromiser(function() { return promiser(item); });
+                _this.addPromiser(function() { return promiserFactory(item); });
             })
         })
         return _this;

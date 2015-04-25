@@ -1,6 +1,6 @@
 'use strict';
 var expect = require('chai').expect;
-var PromiseChain = require('../promise-chain');
+var PromiseChain = require('../index').PromiseChain;
 var tm = require('./testing-model');
 
 // Copy test func data locally.
@@ -10,6 +10,12 @@ var f3 = tm.f3;
 var f4 = tm.f4;
 var f5 = tm.f5;
 var f6 = tm.f6;
+var p1 = tm.p1;
+var p2 = tm.p2;
+var p3 = tm.p3;
+var p4 = tm.p4;
+var p5 = tm.p5;
+var p6 = tm.p6;
 var l1 = tm.l1;
 var e1 = tm.e1;
 
@@ -52,7 +58,7 @@ describe('promise-chain', function() {
         var c = new PromiseChain();
         return c.fork().addResolver(f1)
             .addResolver(f2)
-            .addResolver(f3)
+            .addPromiser(p3)
             .join()
             .then(function() {
                 expect(tm.logger.all()).to.have.members(
@@ -69,7 +75,7 @@ describe('promise-chain', function() {
 
         var c = new PromiseChain();
         return c.fork().addResolver(f1)
-            .addResolver(f2)
+            .addPromiser(p2)
             .addResolver(f3)
             .then(function() {
                 expect(tm.logger.all()).to.have.members(
@@ -79,6 +85,54 @@ describe('promise-chain', function() {
                     ['f1 start', 'f2 start', 'f3 start']
                     );
             });
+    });
+
+    it('should join on all when adding multiple resolvers.', function() {
+        tm.reset();
+
+        var c = new PromiseChain();
+        return c
+            .addResolvers([f1, f2, f3])
+            .addResolver(f4)
+            .then(function() {
+                expect(tm.logger.all()).to.include.members(
+                    ['f1 start', 'f1 finish', 'f2 start', 'f2 finish', 'f3 start', 'f3 finish', 'f4 start', 'f4 finish']
+                    );
+                expect(tm.logger.range(0, 3)).to.have.members(
+                    ['f1 start', 'f2 start', 'f3 start']
+                    );
+                expect(tm.logger.range(6, 2)).to.have.members(
+                    ['f4 start', 'f4 finish']
+                    );
+                },
+                function(error) {
+                    throw new Error("Shouldn't get here: " + error);
+                }
+                );
+    });
+
+    it('should join on all when adding multiple promisers.', function() {
+        tm.reset();
+
+        var c = new PromiseChain();
+        return c
+            .addPromisers([p1, p2, p3])
+            .addResolver(f4)
+            .then(function() {
+                expect(tm.logger.all()).to.include.members(
+                    ['f1 start', 'f1 finish', 'f2 start', 'f2 finish', 'f3 start', 'f3 finish', 'f4 start', 'f4 finish']
+                    );
+                expect(tm.logger.range(0, 3)).to.have.members(
+                    ['f1 start', 'f2 start', 'f3 start']
+                    );
+                expect(tm.logger.range(6, 2)).to.have.members(
+                    ['f4 start', 'f4 finish']
+                    );
+                },
+                function(error) {
+                    throw new Error("Shouldn't get here: " + error);
+                }
+                );
     });
 
     it('should appropriately serliase, fork and join promises', function() {

@@ -23,6 +23,9 @@ function f1(resolve, reject) {
         DELAY
     );
 }
+function p1() {
+    return new Promise(f1);
+}
 
 function f2(resolve, reject) {
     var rh = runHash;
@@ -34,6 +37,9 @@ function f2(resolve, reject) {
         }, 
         DELAY
     );
+}
+function p2() {
+    return new Promise(f2);
 }
 
 function f3(resolve, reject) {
@@ -47,6 +53,9 @@ function f3(resolve, reject) {
         DELAY
     );
 }
+function p3() {
+    return new Promise(f3);
+}
 
 function f4(resolve, reject) {
     var rh = runHash;
@@ -58,6 +67,9 @@ function f4(resolve, reject) {
         }, 
         DELAY
     );
+}
+function p4() {
+    return new Promise(f4);
 }
 
 function f5(resolve, reject) {
@@ -71,6 +83,9 @@ function f5(resolve, reject) {
         DELAY
     );
 }
+function p5() {
+    return new Promise(f5);
+}
 
 function f6(resolve, reject) {
     var rh = runHash;
@@ -82,6 +97,9 @@ function f6(resolve, reject) {
         }, 
         DELAY
     );
+}
+function p6() {
+    return new Promise(f6);
 }
 
 function l1(resolve, reject) {
@@ -117,6 +135,12 @@ module.exports = {
     "f4": f4,
     "f5": f5,
     "f6": f6,
+    "p1": p1,
+    "p2": p2,
+    "p3": p3,
+    "p4": p4,
+    "p5": p5,
+    "p6": p6,
     "l1": l1,
     "e1": e1
 }

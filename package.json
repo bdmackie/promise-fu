@@ -1,6 +1,6 @@
 {
   "name": "promise-fu",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Helpers for working with promises.",
   "main": "index.js",
   "scripts": {

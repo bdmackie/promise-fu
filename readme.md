@@ -7,9 +7,19 @@ A small library providing helpers for working with promises and asynchronous pro
 
   npm install promise-fu --save-dev
 
-## Example
+## Example 1
 
-## Example
+```javascript
+    var c = new PromiseChain();
+    return c.addResolver(f1)
+        .addResolvers([f2, f3])
+        .addResolver(f4)
+        .then(function() {
+            console.log("First ran f1, then f2 & f3 in parallel, then joined to run f4 and then finish.");
+        });
+```
+
+## Example 2
 
 ```javascript
     var c = new PromiseChain();

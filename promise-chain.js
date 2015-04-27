@@ -31,17 +31,6 @@ function PromiseChain(parent) {
     }
 
     /**
-     * Add a promiser style function (a functions that returns a promise) to the chain.
-     */
-    _this.addPromiser = function(promiser) {
-        if (_fork)
-            _fork.addPromiser(promiser);
-        else
-            _promise = _promise.then(promiser);
-        return _this;      
-    }
-
-    /**
      * Add a collection of promiser style functions (a functions that returns a promise) 
      * to the chain, to run in parallel and join as an 'all'. 
      * This will be the case whether the promise chain has been forked or not.

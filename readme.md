@@ -5,7 +5,7 @@ A small library providing helpers for working with promises and asynchronous pro
 
 ## Installation
 
-  npm install promise-fu --save-dev
+  npm install promise-fu
 
 ## Example 1
 

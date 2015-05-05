@@ -1,7 +1,7 @@
 /**
  * @file Utility for maintaining and joining a set of promises running in parallel.
  * @copyright Ben Mackie 2015
- * @license Apache-2.0
+ * @license MIT
  */
 'use strict';
 var Promise = require('bluebird');

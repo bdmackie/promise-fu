@@ -1,7 +1,7 @@
 /**
  * @file Manages a chain of promises with serial and paralell capabilities. 
  * @copyright Ben Mackie 2015
- * @license Apache-2.0
+ * @license MIT
  */
 'use strict';
 var Promise = require('bluebird');
